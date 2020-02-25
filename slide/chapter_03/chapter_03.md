@@ -102,7 +102,7 @@ Status: Yes
     : CPU 환경 도커 컨테이너 띄우기
     docker pull ratsgo/embedding-cpu
     docker run -it --rm ratsgo/embedding-cpu bash   # rm : 컨테이너 날라감. 휘발성. rm 뺴고.
-    
+
     # 파일 목록 확인 우분투 명령어
     root@de7f89818bf8:/notebooks/embedding# ll
 
@@ -125,17 +125,17 @@ root@de7f89818bf8:/notebooks/embedding#
 
     : 최신 실습 코드 업데이트
     git pull origin master
-    
+
     : 전처리 완료된 데이터 다운로드 -> to docker local directory.
     bash preprocess.sh dump-processed
 
-Q. 위 코드 수행시 컴퓨터 로컬이 아닌 docker local directory로 파일이 저장되는것? 
+Q. 위 코드 수행시 컴퓨터 로컬이 아닌 docker local directory로 파일이 저장되는것?
 
 (2) web에서 데이터 다운로드
 
 [https://ratsgo.github.io/embedding/downloaddata.html](https://ratsgo.github.io/embedding/downloaddata.html)
 
-     
+
 
 ---
 
@@ -154,24 +154,24 @@ Q. 위 코드 수행시 컴퓨터 로컬이 아닌 docker local directory로 파
 [https://blog.naver.com/koys007/221460757885](https://blog.naver.com/koys007/221460757885)
 
     from konlpy.tag import Okt
-    
+
     tokenizer = Okt()
-    
-    
+
+
     text_raw = '구조도 그렇고 구멍에 이빨이 들어갈수있어서 치석제거도 잘될꺼 같네욬ㅋ'
     text_refined = '구조도 그렇고 구멍에 이빨이 들어갈 수 있어서 치석 제거도 잘 될 것 같네요ㅋㅋ'
 
     # morphs : 텍스트를 형태소 단위로 분리
-    
+
     refined_basic = okt.morphs(text_refined)
     refined_norm = okt.morphs(text_refined, norm=True)   # 문장 정규화
     refined_stem = okt.morphs(text_refined, stem=True)   # 어근 추출
-    
+
     print(refined_basic)
     print(refined_norm)   
     print(refined_stem)
-    
-    
+
+
     # ['구조도', '그렇고', '구멍', '에', '이빨', '이', '들어갈', '수', '있어서', '치석', '제거', '도', '잘', '될', '것', '같네요', 'ㅋㅋ']
     # ['구조도', '그렇고', '구멍', '에', '이빨', '이', '들어갈', '수', '있어서', '치석', '제거', '도', '잘', '될', '것', '같네요', 'ㅋㅋ']
     # ['구조도', '그렇다', '구멍', '에', '이빨', '이', '들어가다', '수', '있다', '치석', '제거', '도', '자다', '되다', '것', '같다', 'ㅋㅋ']
@@ -180,30 +180,30 @@ Q. 위 코드 수행시 컴퓨터 로컬이 아닌 docker local directory로 파
     raw_norm = okt.morphs(text_raw, norm=True)
     raw_stem = okt.morphs(text_raw, stem=True)
     raw_norm_stem = okt.morphs(text_raw, norm=True, stem=True)
-    
+
     print(raw_basic)
     print(raw_norm)   # poor
     print(raw_stem)   # soso
     print(raw_norm_stem)
-    
-    
+
+
     # ['구조도', '그렇고', '구멍', '에', '이빨', '이', '들어갈수있어서', '치석제거', '도', '잘', '될꺼', '같네욬', 'ㅋ']
     # ['구조도', '그렇고', '구멍', '에', '이빨', '이', '들어갈수있어서', '치석제거', '도', '잘', '될꺼', '같네요', 'ㅋ']
     # ['구조도', '그렇다', '구멍', '에', '이빨', '이', '들어가다', '치석제거', '도', '잘', '되다', '같네욬', 'ㅋ']
     # ['구조도', '그렇다', '구멍', '에', '이빨', '이', '들어가다', '치석제거', '도', '잘', '되다', '같다', 'ㅋ']
 
-     
+
 
     # morphs : 품사 테깅
     # https://docs.google.com/spreadsheets/d/1OGAjUvalBuX-oZvZ_-9tEfYD2gQe7hTGsgUpiiBSXI8/edit#gid=0
-    
+
     refined_pos = okt.pos(text_refined, norm=True, stem=True)
     refined_pos_join = okt.pos(text_refined, norm=True, stem=True, join=True)
-    
+
     print(refined_pos)
     print(refined_pos_join)
-    
-    
+
+
     # [('구조도', 'Noun'), ('그렇다', 'Adjective'), ('구멍', 'Noun'), ('에', 'Josa'), ('이빨', 'Noun'), ('이', 'Josa'), ('들어가다', 'Verb'), ('수', 'Noun'), ('있다', 'Adjective'), ('치석', 'Noun'), ('제거', 'Noun'), ('도', 'Josa'), ('자다', 'Verb'), ('되다', 'Verb'), ('것', 'Noun'), ('같다', 'Adjective'), ('ㅋㅋ', 'KoreanParticle')]
     # ['구조도/Noun', '그렇다/Adjective', '구멍/Noun', '에/Josa', '이빨/Noun', '이/Josa', '들어가다/Verb', '수/Noun', '있다/Adjective', '치석/Noun', '제거/Noun', '도/Josa', '자다/Verb', '되다/Verb', '것/Noun', '같다/Adjective', 'ㅋㅋ/KoreanParticle']
 
@@ -215,24 +215,24 @@ Q. 위 코드 수행시 컴퓨터 로컬이 아닌 docker local directory로 파
 
     # docker environment.
     # 윈도우에서는 실패
-    
+
     # bash -> python
-    
+
     from khaiii import KhaiiiApi
     tokenizer = KhaiiiApi()
-    
+
     data = tokenizer.analyze('아버지가방에들어가신다')
     print(data[0])
      ## 아버지가방에들어가신다  아버지/NNG + 가/JKS + 방/NNG + 에/JKB + 들어가/VV + 시/EP + ㄴ다/EC
-    
+
     tokens = list()
-    
+
     for word in data:  # 왜 루프를 돌린건지는 모르겠음.
         tokens.extend([str(m).split("/")[0] for m in word.morphs])
         # word.morphs: 형태서 분석한 결과 리스트
         # str(word.morphs[0]) == 아버지/NNG'
         # str(word.morphs[0].split('/')[0] == 아버지
-    
+
     print(tokens)
     # ['아버지', '가', '방', '에', '들어가', '시', 'ㄴ다']
 
@@ -248,7 +248,7 @@ Q. 위 코드 수행시 컴퓨터 로컬이 아닌 docker local directory로 파
 
 > Branching Entropy
 
-![3/Untitled.png](3/Untitled.png)
+![Untitled](https://user-images.githubusercontent.com/47301926/75226043-06bbe980-57ef-11ea-8fc5-9dc4de237bae.png)
 
 [https://github.com/lovit/soynlp/blob/master/tutorials/wordextractor_lecture.ipynb](https://github.com/lovit/soynlp/blob/master/tutorials/wordextractor_lecture.ipynb)
 
@@ -260,17 +260,17 @@ Q. 위 코드 수행시 컴퓨터 로컬이 아닌 docker local directory로 파
 2. "단어의 경계"에서 앤트로피가 높을 것이라는 전제 하에 단어와 단어를 구분할 수 있음(중국어)
 3. Korean letters?  정보 앤트로피 개념을 문장/어절에서 단어를 추출하기 위해 사용 가능.
 
-![3/Untitled%201.png](3/Untitled%201.png)
+![Untitled 1](https://user-images.githubusercontent.com/47301926/75226047-0885ad00-57ef-11ea-95d2-b15ce308c491.png)
 
 > Cohesion Probability
 
-![3/Untitled%202.png](3/Untitled%202.png)
+![Untitled 2](https://user-images.githubusercontent.com/47301926/75226048-0885ad00-57ef-11ea-8756-80ef50b18b19.png)
 
 1. 응집 확률(Cohesion Probability), 즉 하나의 문자집합 내에서 "연결강도"가 높을 수록 해당 문자집합은 하나의 단어로 보는 개념.
 
       ex) corpus 내 문자집합을 카운팅.
 
-     노 (200) 
+     노 (200)
      노래 (100)
      노란 (100)
      노래가 (50)
