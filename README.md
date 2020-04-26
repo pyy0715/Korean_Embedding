@@ -34,6 +34,8 @@ Name                    | Date       | Reviewer
 Paper Review            | 03/23/2020 | [YoungYeon Park](https://github.com/pyy0715), MyungHoon Jin, gyungsu min
 5.5 Transformer(1)      | 03/30/2020 | [YoungYeon Park](https://github.com/pyy0715), MyungHoon Jin, gyungsu min
 5.5 Transformer(2)      | 04/07/2020 | [YoungYeon Park](https://github.com/pyy0715), MyungHoon Jin, gyungsu min, KwangJune Choi
+5.5 Transformer(3)      | 04/13/2020 | [YoungYeon Park](https://github.com/pyy0715), MyungHoon Jin, KwangJune Choi
+5.6 BERT(1)      | 04/26/2020 | [YoungYeon Park](https://github.com/pyy0715), MyungHoon Jin, KwangJune Choi
 
 # Reference
 
